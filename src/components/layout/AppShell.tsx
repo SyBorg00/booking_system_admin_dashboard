@@ -46,10 +46,23 @@ export default function AppShell({
     const { user, authenticated, loading, logout } = useAuth();
 
     useEffect(() => {
-        if (!loading && !authenticated) {
+        if (!loading && !authenticated || !user) {
+
             router.replace("/login");
         }
-    }, [loading, authenticated, router]);
+    }, [
+        loading,
+        authenticated,
+        user,
+        pathname,
+        router,
+    ]);
+
+    // useEffect(() => {
+    //     if (!loading && (!authenticated || !user)) {
+    //         router.replace("/login");
+    //     }
+    // }, [loading, authenticated, router]);
 
     if (loading) {
         return null;

@@ -35,9 +35,9 @@ export function AuthProvider({
 
     useEffect(() => {
         const storedUser = getUser();
-
+        const authStatus = isAuthenticated();
         setUser(storedUser);
-        setAuthenticated(isAuthenticated());
+        setAuthenticated(authStatus);
         setLoading(false);
     }, []);
 
