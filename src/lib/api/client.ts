@@ -1,3 +1,5 @@
+import { getToken } from "../auth";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 
@@ -10,8 +12,8 @@ export async function apiFetch<T>(
     options: RequestInit = {}
 ): Promise<T> {
 
-    // Add the token to the request headers if it exists
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    // Get the token from localStorage
+    const token = getToken();
 
     const response = await fetch(`${API_URL}${endpoint}`, {
         ...options,
