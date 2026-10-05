@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { saveAuth } from "@/lib/auth";
 
 import { login } from "@/lib/api/auth";
 
@@ -22,8 +23,11 @@ export default function LoginPage() {
         try {
             const response = await login({ email, password });
 
-            // Store the token in localStorage
-            localStorage.setItem("token", response.token);
+            // Save the token and user in localStorage for authentication persistence
+            saveAuth(
+                response.token,
+                response.user
+            );
 
             // Redirect to the dashboard
             router.push("/dashboard");

@@ -1,6 +1,8 @@
+import { ReactNode } from "react";
 import { apiFetch } from "./client";
 
 export interface User {
+    first_name: ReactNode;
     id: number;
     name: string;
     email: string;
