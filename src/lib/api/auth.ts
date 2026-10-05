@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
 import { apiFetch } from "./client";
 
+// User interface
 export interface User {
+    last_name: ReactNode;
     first_name: ReactNode;
     id: number;
     name: string;
@@ -9,13 +11,14 @@ export interface User {
     role: "super_admin" | "admin" | "staff";
 }
 
+// Login response interface
 interface LoginResponse {
     message: string;
     token: string;
     user: User;
 }
 
-// Login function
+// Login Credentials interface
 interface LoginCredentials {
     email: string;
     password: string;
