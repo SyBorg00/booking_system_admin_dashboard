@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import type { SubmitEvent } from "react";
 import { useRouter } from "next/navigation";
 import { saveAuth } from "@/lib/auth";
 
@@ -15,23 +16,26 @@ export default function LoginPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(
+        event: SubmitEvent<HTMLFormElement>
+    ) {
         event.preventDefault();
         setLoading(true);
         setError("");
 
         try {
-            const response = await login({ email, password });
-
-            // Save the token and user in localStorage for authentication persistence
+            const response = await login({
+                email,
+                password,
+            });
             saveAuth(
                 response.token,
                 response.user
             );
-
-            // Redirect to the dashboard
             router.push("/dashboard");
+
         } catch (error) {
+            console.error("LOGIN ERROR:", error);
             setError(
                 error instanceof Error
                     ? error.message
