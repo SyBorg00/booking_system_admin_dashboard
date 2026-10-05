@@ -8,6 +8,7 @@ import { clearAuth, getUser, isAuthenticated, } from "@/lib/auth";
 interface AuthContextType {
     user: User | null;
     authenticated: boolean;
+    loading: boolean;
     logout: () => void;
 }
 
@@ -30,11 +31,14 @@ export function AuthProvider({
     const [authenticated, setAuthenticated] =
         useState(false);
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const storedUser = getUser();
 
         setUser(storedUser);
         setAuthenticated(isAuthenticated());
+        setLoading(false);
     }, []);
 
     // Logout function that clears the authentication state and localStorage
@@ -51,6 +55,7 @@ export function AuthProvider({
             value={{
                 user,
                 authenticated,
+                loading,
                 logout,
             }}
         >
