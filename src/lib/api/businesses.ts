@@ -16,8 +16,14 @@ export interface Business {
     updated_at: string;
 }
 
+// For the GET /businesses API response, expect array list of businesses
 interface BusinessListResponse {
     data: Business[];
+}
+
+// For the GET /businesses/{id} API response, expect a single business object
+interface BusinessResponse {
+    data: Business;
 }
 
 // call upon the GET business API from the Laravel backend
@@ -27,6 +33,17 @@ export async function getBusinesses(): Promise<
     const response =
         await apiFetch<BusinessListResponse>(
             "/businesses"
+        );
+
+    return response.data;
+}
+
+// call upon the GET business/{id} API from the Laravel backend
+export async function getBusiness(id: number): Promise<Business> {
+
+    const response =
+        await apiFetch<BusinessResponse>(
+            `/businesses/${id}`
         );
 
     return response.data;
