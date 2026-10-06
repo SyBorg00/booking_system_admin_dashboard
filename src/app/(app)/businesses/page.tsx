@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import {
@@ -8,12 +9,14 @@ import {
 } from "@/lib/api/businesses";
 
 export default function BusinessesPage() {
+
+    // State to hold the businesses data, loading state, and error message
     const [businesses, setBusinesses] =
         useState<Business[]>([]);
-
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    // Fetch the businesses data when the component mounts
     useEffect(() => {
         async function loadBusinesses() {
             try {
@@ -34,94 +37,82 @@ export default function BusinessesPage() {
         loadBusinesses();
     }, []);
 
-    return (
-        <div>
-            <div>
-                <h1 className="text-3xl font-bold">
-                    Businesses
-                </h1>
+    if (loading) {
+        return (
+            <main className="p-6">
+                <p>Loading businesses...</p>
+            </main>
+        );
+    }
 
-                <p className="mt-2 text-gray-600">
-                    Manage businesses available to your
-                    account.
-                </p>
+    if (error) {
+        return (
+            <main className="p-6">
+                <p className="text-red-500">{error}</p>
+            </main>
+        );
+    }
+
+    return (
+        <main className="p-6">
+            <div className="flex items-center justify-between">
+                <div>
+                    <h1 className="text-3xl font-bold">
+                        Businesses
+                    </h1>
+
+                    <p className="mt-1 text-gray-500">
+                        Manage your businesses.
+                    </p>
+                </div>
             </div>
 
-            {loading && (
-                <p className="mt-8 text-gray-500">
-                    Loading businesses...
+            {businesses.length === 0 ? (
+                <p className="mt-6 text-gray-500">
+                    No businesses found.
                 </p>
-            )}
+            ) : (
+                <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {businesses.map((business) => (
+                        <Link
+                            key={business.id}
+                            href={`/businesses/${business.id}`}
+                            className="block rounded-lg border p-5 transition hover:shadow-md"
+                        >
+                            <div className="flex items-start justify-between gap-4">
+                                <h2 className="text-lg font-semibold">
+                                    {business.name}
+                                </h2>
 
-            {error && (
-                <div className="mt-8 rounded border border-red-200 bg-red-50 p-4 text-red-700">
-                    {error}
+                                <span className="text-sm">
+                                    {business.status}
+                                </span>
+                            </div>
+
+                            <p className="mt-2 text-sm text-gray-500">
+                                {business.description ||
+                                    "No description"}
+                            </p>
+
+                            <div className="mt-4 space-y-1 text-sm">
+                                <p>
+                                    Currency:{" "}
+                                    {business.currency}
+                                </p>
+
+                                <p>
+                                    Timezone:{" "}
+                                    {business.timezone}
+                                </p>
+                            </div>
+
+                            <p className="mt-4 text-sm font-medium">
+                                View details →
+                            </p>
+                        </Link>
+                    ))}
                 </div>
             )}
-
-            {!loading &&
-                !error &&
-                businesses.length === 0 && (
-                    <p className="mt-8 text-gray-500">
-                        No businesses found.
-                    </p>
-                )}
-
-            {!loading &&
-                !error &&
-                businesses.length > 0 && (
-                    <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                        {businesses.map((business) => (
-                            <div
-                                key={business.id}
-                                className="rounded-lg border bg-white p-5 shadow-sm"
-                            >
-                                <div className="flex items-start justify-between gap-4">
-                                    <div>
-                                        <h2 className="font-semibold">
-                                            {business.name}
-                                        </h2>
-
-                                        <p className="mt-1 text-sm text-gray-500">
-                                            {business.slug}
-                                        </p>
-                                    </div>
-
-                                    <span
-                                        className={`rounded-full px-2 py-1 text-xs ${business.status ===
-                                                "active"
-                                                ? "bg-green-100 text-green-700"
-                                                : "bg-gray-100 text-gray-600"
-                                            }`}
-                                    >
-                                        {business.status}
-                                    </span>
-                                </div>
-
-                                <div className="mt-4 space-y-1 text-sm text-gray-600">
-                                    <p>
-                                        Currency:{" "}
-                                        {business.currency}
-                                    </p>
-
-                                    <p>
-                                        Timezone:{" "}
-                                        {business.timezone}
-                                    </p>
-
-                                    {business.email && (
-                                        <p>
-                                            Email:{" "}
-                                            {
-                                                business.email
-                                            }
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-        </div>
+        </main>
     );
 }
