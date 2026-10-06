@@ -8,6 +8,7 @@ import {
     getBusiness,
     type Business,
 } from "@/lib/api/businesses";
+import Card from "@/components/ui/Card";
 
 
 // This page is for when you select a specific business from the list
@@ -86,18 +87,21 @@ export default function BusinessDetailPage() {
 
     return (
         <main className="p-6">
+
+            {/* Back to business link*/}
             <div className="mb-6">
                 <Link
                     href="/businesses"
-                    className="text-sm underline"
+                    className="text-sm text-[var(--primary)] underline"
                 >
                     ← Back to businesses
                 </Link>
             </div>
 
+            {/* Business title and status section */}
             <div className="flex items-start justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold">
+                    <h1 className="text-3xl text-[var(--text-primary)] font-bold">
                         {business.name}
                     </h1>
 
@@ -116,16 +120,18 @@ export default function BusinessDetailPage() {
                 </span>
             </div>
 
+            {/* Business details and contact info section*/}
             <div className="mt-8 grid gap-6 md:grid-cols-2">
-                <section className="rounded-lg border p-5">
+
+                <Card className="text-[var(--text-primary)]">
                     <h2 className="text-lg font-semibold">
                         Business Information
                     </h2>
 
                     <dl className="mt-4 space-y-3">
                         <div>
-                            <dt className="text-sm text-gray-500">
-                                Description
+                            <dt className="text-sm text-[var(--text-secondary)]">
+                                Description:
                             </dt>
                             <dd>
                                 {business.description ||
@@ -134,29 +140,29 @@ export default function BusinessDetailPage() {
                         </div>
 
                         <div>
-                            <dt className="text-sm text-gray-500">
-                                Currency
+                            <dt className="text-sm text-[var(--text-secondary)]">
+                                Currency:
                             </dt>
                             <dd>{business.currency}</dd>
                         </div>
 
                         <div>
-                            <dt className="text-sm text-gray-500">
-                                Timezone
+                            <dt className="text-sm text-[var(--text-secondary)]">
+                                Timezone:
                             </dt>
                             <dd>{business.timezone}</dd>
                         </div>
                     </dl>
-                </section>
+                </Card>
 
-                <section className="rounded-lg border p-5">
+                <Card className="text-[var(--text-primary)]">
                     <h2 className="text-lg font-semibold">
                         Contact Information
                     </h2>
 
                     <dl className="mt-4 space-y-3">
                         <div>
-                            <dt className="text-sm text-gray-500">
+                            <dt className="text-sm text-[var(--text-secondary)]">
                                 Phone
                             </dt>
                             <dd>
@@ -166,7 +172,7 @@ export default function BusinessDetailPage() {
                         </div>
 
                         <div>
-                            <dt className="text-sm text-gray-500">
+                            <dt className="text-sm text-[var(--text-secondary)]">
                                 Email
                             </dt>
                             <dd>
@@ -176,7 +182,7 @@ export default function BusinessDetailPage() {
                         </div>
 
                         <div>
-                            <dt className="text-sm text-gray-500">
+                            <dt className="text-sm text-[var(--text-secondary)]">
                                 Address
                             </dt>
                             <dd>
@@ -185,17 +191,19 @@ export default function BusinessDetailPage() {
                             </dd>
                         </div>
                     </dl>
-                </section>
+                </Card>
             </div>
 
-            <section className="mt-6 rounded-lg border p-5">
+
+            {/* Record information details section */}
+            <Card className="mt-5 text-[var(--text-primary)]">
                 <h2 className="text-lg font-semibold">
                     Record Information
                 </h2>
 
                 <dl className="mt-4 grid gap-4 md:grid-cols-2">
                     <div>
-                        <dt className="text-sm text-gray-500">
+                        <dt className="text-sm text[var(--text-secondary)]">
                             Created
                         </dt>
                         <dd>
@@ -206,7 +214,7 @@ export default function BusinessDetailPage() {
                     </div>
 
                     <div>
-                        <dt className="text-sm text-gray-500">
+                        <dt className="text-sm text[var(--text-secondary)]">
                             Last Updated
                         </dt>
                         <dd>
@@ -216,7 +224,7 @@ export default function BusinessDetailPage() {
                         </dd>
                     </div>
                 </dl>
-            </section>
+            </Card>
         </main>
     );
 }
