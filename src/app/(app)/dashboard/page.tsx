@@ -8,7 +8,7 @@ export default function DashboardPage() {
     return (
         <div>
             <div>
-                <h1 className="text-3xl font-bold">
+                <h1 className="text-3xl text-[var(--text-primary)] font-bold">
                     Dashboard
                 </h1>
 
@@ -53,11 +53,11 @@ function DashboardCard({
 }: DashboardCardProps) {
     return (
         <div className="rounded-lg border bg-white p-5 shadow-sm">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-[var(--text-primary)]">
                 {title}
             </p>
 
-            <p className="mt-2 text-2xl font-bold">
+            <p className="mt-2 text-2xl text-[var(--text-primary)] font-bold ">
                 {value}
             </p>
         </div>
