@@ -58,12 +58,6 @@ export default function AppShell({
         router,
     ]);
 
-    // useEffect(() => {
-    //     if (!loading && (!authenticated || !user)) {
-    //         router.replace("/login");
-    //     }
-    // }, [loading, authenticated, router]);
-
     if (loading) {
         return null;
     }
@@ -83,7 +77,7 @@ export default function AppShell({
             <aside className="hidden w-64 border-r bg-white md:block">
                 <div className="flex h-full flex-col">
                     <div className="border-b px-6 py-5">
-                        <h1 className="text-xl font-bold">
+                        <h1 className="text-xl text-[var(--text-primary)] font-bold">
                             Booking System
                         </h1>
                     </div>
@@ -99,7 +93,7 @@ export default function AppShell({
                                     href={item.href}
                                     className={`block rounded px-4 py-2 text-sm ${active
                                         ? "bg-black text-white"
-                                        : "text-gray-700 hover:bg-gray-100"
+                                        : "text-[var(--text-primary)] hover:bg-gray-100"
                                         }`}
                                 >
                                     {item.name}
@@ -114,7 +108,7 @@ export default function AppShell({
                             {user.last_name}
                         </p>
 
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-[var(--text-primary)]">
                             {user.role}
                         </p>
 
@@ -132,11 +126,11 @@ export default function AppShell({
             <div className="flex min-w-0 flex-1 flex-col">
                 <header className="border-b bg-white px-6 py-4">
                     <div className="flex items-center justify-between">
-                        <h2 className="font-semibold">
+                        <h2 className="font-semibold text-[var(--text-primary)]" >
                             Booking System
                         </h2>
 
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-[var(--text-primary)]">
                             {user.first_name}{" "}
                             {user.last_name}
                         </div>
