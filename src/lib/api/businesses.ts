@@ -1,5 +1,6 @@
 import { apiFetch } from "@/lib/api/client";
 
+// Main interface for a business object returned from the API
 export interface Business {
     id: number;
     name: string;
@@ -14,6 +15,20 @@ export interface Business {
     status: "active" | "inactive";
     created_at: string;
     updated_at: string;
+}
+
+// Interface for creating a new business object to send to the API
+export interface CreateBusinessData {
+    name: string;
+    slug?: string;
+    description?: string | null;
+    currency: string;
+    phone?: string | null;
+    email?: string | null;
+    address?: string | null;
+    timezone: string;
+    logo?: string | null;
+    status?: "active" | "inactive";
 }
 
 // For the GET /businesses API response, expect array list of businesses
@@ -45,6 +60,21 @@ export async function getBusiness(id: number): Promise<Business> {
         await apiFetch<BusinessResponse>(
             `/businesses/${id}`
         );
+
+    return response.data;
+}
+
+// call upon the POST business API from the Laravel backend
+export async function createBusiness(
+    data: CreateBusinessData
+): Promise<Business> {
+    const response = await apiFetch<BusinessResponse>(
+        "/businesses",
+        {
+            method: "POST",
+            body: JSON.stringify(data),
+        }
+    );
 
     return response.data;
 }

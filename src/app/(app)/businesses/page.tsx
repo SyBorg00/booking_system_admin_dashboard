@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Button from "@/components/ui/Button";
+import PageHeader from "@/components/ui/PageHeader";
 import { useEffect, useState } from "react";
 import Card from "@/components/ui/Card";
 
@@ -56,17 +58,17 @@ export default function BusinessesPage() {
 
     return (
         <main className="p-6 text-[var(--text-primary)]">
-            <div className="flex items-center justify-between ">
-                <div>
-                    <h1 className="text-3xl font-bold ">
-                        Businesses
-                    </h1>
-
-                    <p className="mt-1 text-[var(--text-primary)]">
-                        Manage your businesses.
-                    </p>
-                </div>
-            </div>
+            <PageHeader
+                title="Businesses"
+                description="Manage the businesses in your booking system."
+                action={
+                    <Link href="/businesses/create">
+                        <Button>
+                            Create Business
+                        </Button>
+                    </Link>
+                }
+            />
 
             {businesses.length === 0 ? (
                 <p className="mt-6 text-[var(--text-primary)]">
