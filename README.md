@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+The very first demo booking website. Utilizing [Next.js](https://nextjs.org) and Typescript as the frontend, and a Laravel based backend
 
 ## Getting Started
 
