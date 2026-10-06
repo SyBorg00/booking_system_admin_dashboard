@@ -39,7 +39,7 @@ export default function BusinessesPage() {
 
     if (loading) {
         return (
-            <main className="p-6">
+            <main className="p-6 text-[var(--text-primary)]">
                 <p>Loading businesses...</p>
             </main>
         );
@@ -54,21 +54,21 @@ export default function BusinessesPage() {
     }
 
     return (
-        <main className="p-6">
-            <div className="flex items-center justify-between">
+        <main className="p-6 text-[var(--text-primary)]">
+            <div className="flex items-center justify-between ">
                 <div>
-                    <h1 className="text-3xl font-bold">
+                    <h1 className="text-3xl font-bold ">
                         Businesses
                     </h1>
 
-                    <p className="mt-1 text-gray-500">
+                    <p className="mt-1 text-[var(--text-primary)]">
                         Manage your businesses.
                     </p>
                 </div>
             </div>
 
             {businesses.length === 0 ? (
-                <p className="mt-6 text-gray-500">
+                <p className="mt-6 text-[var(--text-primary)]">
                     No businesses found.
                 </p>
             ) : (
@@ -77,36 +77,40 @@ export default function BusinessesPage() {
                         <Link
                             key={business.id}
                             href={`/businesses/${business.id}`}
-                            className="block rounded-lg border p-5 transition hover:shadow-md"
+                            className="block rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 text-[var(--text-primary)] transition hover:shadow-md"
                         >
                             <div className="flex items-start justify-between gap-4">
                                 <h2 className="text-lg font-semibold">
                                     {business.name}
                                 </h2>
 
-                                <span className="text-sm">
+                                <span className="text-sm text-[var(--text-secondary)]">
                                     {business.status}
                                 </span>
                             </div>
 
-                            <p className="mt-2 text-sm text-gray-500">
+                            <p className="mt-2 text-sm text-[var(--text-secondary)]">
                                 {business.description ||
                                     "No description"}
                             </p>
 
-                            <div className="mt-4 space-y-1 text-sm">
+                            <div className="mt-4 space-y-1 text-sm text-[var(--text-secondary)]">
                                 <p>
                                     Currency:{" "}
-                                    {business.currency}
+                                    <span className="text-[var(--text-primary)]">
+                                        {business.currency}
+                                    </span>
                                 </p>
 
                                 <p>
                                     Timezone:{" "}
-                                    {business.timezone}
+                                    <span className="text-[var(--text-primary)]">
+                                        {business.timezone}
+                                    </span>
                                 </p>
                             </div>
 
-                            <p className="mt-4 text-sm font-medium">
+                            <p className="mt-4 text-sm font-medium text-[var(--primary)]">
                                 View details →
                             </p>
                         </Link>
