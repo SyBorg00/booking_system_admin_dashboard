@@ -1,5 +1,6 @@
 "use client";
 
+import Card from "@/components/ui/Card";
 import { useAuth } from "@/context/AuthContext";
 
 export default function DashboardPage() {
@@ -52,14 +53,16 @@ function DashboardCard({
     value,
 }: DashboardCardProps) {
     return (
-        <div className="rounded-lg border bg-white p-5 shadow-sm">
-            <p className="text-sm text-[var(--text-primary)]">
-                {title}
-            </p>
+        <Card>
+            <div>
+                <p className="text-sm text-[var(--text-primary)]">
+                    {title}
+                </p>
 
-            <p className="mt-2 text-2xl text-[var(--text-primary)] font-bold ">
-                {value}
-            </p>
-        </div>
+                <p className="mt-2 text-2xl text-[var(--text-primary)] font-bold ">
+                    {value}
+                </p>
+            </div>
+        </Card>
     );
 }
