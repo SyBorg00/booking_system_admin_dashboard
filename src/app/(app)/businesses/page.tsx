@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Card from "@/components/ui/Card";
 
 import {
     getBusinesses,
@@ -77,42 +78,43 @@ export default function BusinessesPage() {
                         <Link
                             key={business.id}
                             href={`/businesses/${business.id}`}
-                            className="block rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 text-[var(--text-primary)] transition hover:shadow-md"
+                            className="block transition hover:shadow-md"
                         >
-                            <div className="flex items-start justify-between gap-4">
-                                <h2 className="text-lg font-semibold">
-                                    {business.name}
-                                </h2>
+                            <Card>
+                                <div className="flex items-start justify-between gap-4">
+                                    <h2 className="text-lg font-semibold">
+                                        {business.name}
+                                    </h2>
 
-                                <span className="text-sm text-[var(--text-secondary)]">
-                                    {business.status}
-                                </span>
-                            </div>
-
-                            <p className="mt-2 text-sm text-[var(--text-secondary)]">
-                                {business.description ||
-                                    "No description"}
-                            </p>
-
-                            <div className="mt-4 space-y-1 text-sm text-[var(--text-secondary)]">
-                                <p>
-                                    Currency:{" "}
-                                    <span className="text-[var(--text-primary)]">
-                                        {business.currency}
+                                    <span className="text-sm text-[var(--text-secondary)]">
+                                        {business.status}
                                     </span>
+                                </div>
+
+                                <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                                    {business.description || "No description"}
                                 </p>
 
-                                <p>
-                                    Timezone:{" "}
-                                    <span className="text-[var(--text-primary)]">
-                                        {business.timezone}
-                                    </span>
-                                </p>
-                            </div>
+                                <div className="mt-4 space-y-1 text-sm text-[var(--text-secondary)]">
+                                    <p>
+                                        Currency:{" "}
+                                        <span className="text-[var(--text-primary)]">
+                                            {business.currency}
+                                        </span>
+                                    </p>
 
-                            <p className="mt-4 text-sm font-medium text-[var(--primary)]">
-                                View details →
-                            </p>
+                                    <p>
+                                        Timezone:{" "}
+                                        <span className="text-[var(--text-primary)]">
+                                            {business.timezone}
+                                        </span>
+                                    </p>
+                                </div>
+
+                                <p className="mt-4 text-sm font-medium text-[var(--primary)]">
+                                    View details →
+                                </p>
+                            </Card>
                         </Link>
                     ))}
                 </div>
