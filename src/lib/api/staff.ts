@@ -5,12 +5,20 @@ export interface Staff {
     id: number;
     user_id: number;
     business_id: number;
-    first_name: string;
-    last_name: string;
     phone: string | null;
     position: string | null;
     created_at: string;
     updated_at: string;
+    user: StaffUser;
+}
+
+// Interface for a user associated with a staff member
+interface StaffUser {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    role: string;
 }
 
 // Interface for creating a new staff member
