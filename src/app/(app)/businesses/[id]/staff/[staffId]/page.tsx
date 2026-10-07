@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import DeleteButton from "@/components/ui/DeleteButton";
+import { deleteStaff } from "@/lib/api/staff";
 
 import { getStaffMember, type Staff } from "@/lib/api/staff";
 
@@ -208,6 +210,35 @@ export default function StaffDetailPage() {
                     <Badge variant="success">
                         Active
                     </Badge>
+                </div>
+            </Card>
+
+            {/* Display the delete staff button */}
+            <Card>
+                <div className="flex items-center justify-between gap-4">
+                    <div>
+                        <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                            Staff Management
+                        </h2>
+
+                        <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                            Remove this staff member from the business.
+                        </p>
+                    </div>
+
+                    <DeleteButton
+                        onDelete={() =>
+                            deleteStaff(
+                                businessId,
+                                staff.id
+                            )
+                        }
+                        redirectTo={`/businesses/${businessId}/staff`}
+                        confirmationMessage={`Are you sure you want to remove ${staff.user.first_name} ${staff.user.last_name} from this business?`}
+                        label="Delete Staff"
+                        deletingLabel="Deleting..."
+                    />
+
                 </div>
             </Card>
         </div>
