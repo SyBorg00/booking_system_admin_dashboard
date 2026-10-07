@@ -18,7 +18,7 @@ interface StaffUser {
     first_name: string;
     last_name: string;
     email: string;
-    role: string;
+    role: "super_admin" | "admin" | "staff";
 }
 
 // Interface for creating a new staff member
@@ -96,7 +96,7 @@ export async function updateStaff(
     const response = await apiFetch<StaffResponse>(
         `/businesses/${businessId}/staff/${staffId}`,
         {
-            method: "PATCH",
+            method: "PUT",
             body: JSON.stringify(data),
         }
     );
