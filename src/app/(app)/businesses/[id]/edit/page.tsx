@@ -132,6 +132,7 @@ export default function EditBusinessPage() {
                     <div className="grid gap-6 md:grid-cols-2">
                         <Input
                             id="name"
+                            type="text"
                             label="Business Name"
                             value={name}
                             onChange={(event) => setName(event.target.value)}
@@ -141,6 +142,7 @@ export default function EditBusinessPage() {
 
                         <Input
                             id="slug"
+                            type="text"
                             label="Slug"
                             value={slug}
                             onChange={(event) => setSlug(event.target.value)}
@@ -162,6 +164,7 @@ export default function EditBusinessPage() {
                     <div className="grid gap-6 md:grid-cols-2">
                         <Input
                             id="currency"
+                            type="text"
                             label="Currency Type"
                             value={currency}
                             onChange={(event) => setCurrency(event.target.value)}
@@ -172,6 +175,7 @@ export default function EditBusinessPage() {
 
                         <Input
                             id="timezone"
+                            type="text"
                             label="Timezone"
                             value={timezone}
                             onChange={(event) => setTimezone(event.target.value)}
