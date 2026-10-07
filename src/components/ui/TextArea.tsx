@@ -19,7 +19,7 @@ export default function Textarea({
         <div>
             <label
                 htmlFor={id}
-                className="mb-1 block text-sm font-medium text-[var(--text-primary)]"
+                className="mb-1 block text-sm font-medium text-[var(--text-secondary)]"
             >
                 {label}
             </label>
