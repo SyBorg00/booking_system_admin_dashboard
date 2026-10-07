@@ -31,6 +31,20 @@ export interface CreateBusinessData {
     status?: "active" | "inactive";
 }
 
+// Interface for updating an existing business object to send to the API
+export interface UpdateBusinessData {
+    name?: string;
+    slug?: string;
+    description?: string | null;
+    currency?: string;
+    phone?: string | null;
+    email?: string | null;
+    address?: string | null;
+    timezone?: string;
+    logo?: string | null;
+    status?: "active" | "inactive";
+}
+
 // For the GET /businesses API response, expect array list of businesses
 interface BusinessListResponse {
     data: Business[];
@@ -72,6 +86,22 @@ export async function createBusiness(
         "/businesses",
         {
             method: "POST",
+            body: JSON.stringify(data),
+        }
+    );
+
+    return response.data;
+}
+
+// call upon the PATCH business/{id} API from the Laravel backend
+export async function updateBusiness(
+    id: number,
+    data: UpdateBusinessData
+): Promise<Business> {
+    const response = await apiFetch<BusinessResponse>(
+        `/businesses/${id}`,
+        {
+            method: "PATCH",
             body: JSON.stringify(data),
         }
     );
