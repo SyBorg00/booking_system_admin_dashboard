@@ -167,7 +167,7 @@ export default function EditBusinessPage() {
                             type="text"
                             label="Currency Type"
                             value={currency}
-                            onChange={(event) => setCurrency(event.target.value)}
+                            onChange={(event) => setCurrency(event.target.value.toUpperCase())}
                             required
                             maxLength={3}
                             placeholder="PHP"
@@ -206,7 +206,6 @@ export default function EditBusinessPage() {
                     </div>
 
                     {/* Address */}
-
                     <Input
                         id="address"
                         type="text"

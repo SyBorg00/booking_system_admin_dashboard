@@ -8,6 +8,9 @@ import { createBusiness } from "@/lib/api/businesses";
 import PageHeader from "@/components/ui/PageHeader";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import Textarea from "@/components/ui/TextArea";
+import Select from "@/components/ui/Select";
 
 export default function CreateBusinessPage() {
     const router = useRouter();
@@ -65,6 +68,8 @@ export default function CreateBusinessPage() {
             <PageHeader
                 title="Create Business"
                 description="Add a new business to your booking system."
+                backHref="/businesses"
+                backLabel="Back to Businesses"
             />
 
             <Card>
@@ -79,210 +84,117 @@ export default function CreateBusinessPage() {
                     )}
 
                     <div className="grid gap-6 md:grid-cols-2 text-[var(--text-label)]">
-                        <div>
-                            <label
-                                htmlFor="name"
-                                className="mb-1 block text-sm font-medium"
-                            >
-                                Business Name
-                            </label>
 
-                            <input
+                        {/* Business Name and slug */}
+                        <div className="grid gap-6 md:grid-cols-2">
+                            <Input
                                 id="name"
                                 type="text"
+                                label="Business Name"
                                 value={name}
-                                onChange={(event) =>
-                                    setName(event.target.value)
-                                }
+                                onChange={(event) => setName(event.target.value)}
                                 required
-                                className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--primary)]"
-                                placeholder="Jules Beauty Salon"
-                            />
-                        </div>
-
-                        <div>
-                            <label
-                                htmlFor="slug"
-                                className="mb-1 block text-sm font-medium"
-                            >
-                                Slug
-                            </label>
-
-                            <input
-                                id="slug"
-                                type="text"
-                                value={slug}
-                                onChange={(event) =>
-                                    setSlug(event.target.value)
-                                }
-                                className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--primary)]"
-                                placeholder="jules-beauty-salon"
+                                placeholder="Demo Booking Business"
                             />
 
-                            <p className="mt-1 text-xs text-[var(--text-secondary)]">
-                                Leave blank to generate automatically.
-                            </p>
+                            <div>
+                                <Input
+                                    id="slug"
+                                    type="text"
+                                    label="Slug"
+                                    value={slug}
+                                    onChange={(event) => setSlug(event.target.value)}
+                                    required
+                                    placeholder="demo-booking-business"
+                                />
+                                <p className="mt-1 text-xs text-[var(--text-secondary)]">
+                                    Leave blank to generate automatically.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="text-[var(--text-label)]">
-                        <label
-                            htmlFor="description"
-                            className="mb-1 block text-sm font-medium"
-                        >
-                            Description
-                        </label>
+                    {/* Business Description */}
+                    <Textarea
+                        id="description"
+                        label="Description"
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)}
+                        rows={4}
+                        placeholder="Describe the business..."
+                    />
 
-                        <textarea
-                            id="description"
-                            value={description}
-                            onChange={(event) =>
-                                setDescription(event.target.value)
-                            }
-                            rows={4}
-                            className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--primary)]"
-                            placeholder="Describe the business..."
-                        />
-                    </div>
-
-                    <div className="grid gap-6 md:grid-cols-2 text-[var(--text-label)]">
-                        <div>
-                            <label
-                                htmlFor="currency"
-                                className="mb-1 block text-sm font-medium"
-                            >
-                                Currency
-                            </label>
-
-                            <input
-                                id="currency"
-                                type="text"
-                                value={currency}
-                                onChange={(event) =>
-                                    setCurrency(
-                                        event.target.value.toUpperCase()
-                                    )
-                                }
-                                maxLength={3}
-                                required
-                                className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)] uppercase outline-none focus:border-[var(--primary)]"
-                                placeholder="PHP"
-                            />
-                        </div>
-
-                        <div>
-                            <label
-                                htmlFor="timezone"
-                                className="mb-1 block text-sm font-medium"
-                            >
-                                Timezone
-                            </label>
-
-                            <input
-                                id="timezone"
-                                type="text"
-                                value={timezone}
-                                onChange={(event) =>
-                                    setTimezone(event.target.value)
-                                }
-                                required
-                                className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--primary)]"
-                                placeholder="Asia/Manila"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="grid gap-6 md:grid-cols-2 text-[var(--text-label)]">
-                        <div>
-                            <label
-                                htmlFor="phone"
-                                className="mb-1 block text-sm font-medium"
-                            >
-                                Phone
-                            </label>
-
-                            <input
-                                id="phone"
-                                type="tel"
-                                value={phone}
-                                onChange={(event) =>
-                                    setPhone(event.target.value)
-                                }
-                                className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--primary)]"
-                                placeholder="09171234567"
-                            />
-                        </div>
-
-                        <div className="text-[var(--text-label)]">
-                            <label
-                                htmlFor="email"
-                                className="mb-1 block text-sm font-medium"
-                            >
-                                Email
-                            </label>
-
-                            <input
-                                id="email"
-                                type="email"
-                                value={email}
-                                onChange={(event) =>
-                                    setEmail(event.target.value)
-                                }
-                                className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--primary)]"
-                                placeholder="hello@example.com"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="text-[var(--text-label)]">
-                        <label
-                            htmlFor="address"
-                            className="mb-1 block text-sm font-medium"
-                        >
-                            Address
-                        </label>
-
-                        <input
-                            id="address"
+                    {/*Currency and Timezone */}
+                    <div className="grid gap-6 md:grid-cols-2">
+                        <Input
+                            id="currency"
                             type="text"
-                            value={address}
-                            onChange={(event) =>
-                                setAddress(event.target.value)
-                            }
-                            className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--primary)]"
-                            placeholder="Davao City"
+                            label="Currency Type"
+                            value={currency}
+                            onChange={(event) => setCurrency(event.target.value.toUpperCase())}
+                            required
+                            maxLength={3}
+                            placeholder="PHP"
+                        />
+
+                        <Input
+                            id="timezone"
+                            type="text"
+                            label="Timezone"
+                            value={timezone}
+                            onChange={(event) => setTimezone(event.target.value)}
+                            required
+                            placeholder="Asia/Manila"
                         />
                     </div>
 
-                    <div className="text-[var(--text-label)]">
-                        <label
-                            htmlFor="status"
-                            className="mb-1 block text-sm font-medium"
-                        >
-                            Status
-                        </label>
+                    {/* Contact Information */}
+                    <div className="grid gap-6 md:grid-cols-2">
 
-                        <select
-                            id="status"
-                            value={status}
-                            onChange={(event) =>
-                                setStatus(
-                                    event.target.value as
-                                    | "active"
-                                    | "inactive"
-                                )
-                            }
-                            className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--primary)]"
-                        >
-                            <option value="active">
-                                Active
-                            </option>
+                        <Input
+                            id="phone"
+                            type="tel"
+                            label="Phone"
+                            value={phone}
+                            onChange={(event) => setPhone(event.target.value)}
+                            placeholder="09171234567"
+                        />
 
-                            <option value="inactive">
-                                Inactive
-                            </option>
-                        </select>
+                        <Input
+                            id="email"
+                            type="email"
+                            label="Phone"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
+                            placeholder="hello@example.com"
+                        />
                     </div>
+
+                    {/* Address */}
+                    <Input
+                        id="address"
+                        type="text"
+                        label="Address"
+                        value={address}
+                        onChange={(event) => setAddress(event.target.value)}
+                        placeholder="Davao City"
+                    />
+
+                    {/* Status */}
+                    <Select
+                        id="status"
+                        label="Status"
+                        value={status}
+                        onChange={(event) =>
+                            setStatus(
+                                event.target.value as "active" | "inactive"
+                            )
+                        }
+                        options={[
+                            { label: "Active", value: "active" },
+                            { label: "Inactive", value: "inactive" },
+                        ]}
+                    />
 
                     <div className="flex justify-end gap-3 border-t border-[var(--border)] pt-6">
                         <Button
