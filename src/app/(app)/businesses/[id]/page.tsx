@@ -220,6 +220,33 @@ export default function BusinessDetailPage() {
                     </div>
                 </dl>
             </Card>
+
+            {/* Staff management section */}
+            <div className="mt-6">
+                <Card>
+                    <div className="flex items-center justify-between gap-4">
+                        <div>
+                            <h2 className="text-lg text-[var(--text-primary) font-semibold">
+                                Staff
+                            </h2>
+
+                            <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                                Manage the staff members associated with
+                                this business.
+                            </p>
+                        </div>
+
+                        <Link
+                            href={`/businesses/${business.id}/staff`}
+                        >
+                            <Button variant="secondary">
+                                View Staff
+                            </Button>
+                        </Link>
+                    </div>
+                </Card>
+            </div>
+
         </main>
     );
 }
