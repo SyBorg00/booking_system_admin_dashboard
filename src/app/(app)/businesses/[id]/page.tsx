@@ -226,7 +226,7 @@ export default function BusinessDetailPage() {
                 <Card>
                     <div className="flex items-center justify-between gap-4">
                         <div>
-                            <h2 className="text-lg text-[var(--text-primary) font-semibold">
+                            <h2 className="text-lg text-[var(--text-primary)] font-semibold">
                                 Staff
                             </h2>
 

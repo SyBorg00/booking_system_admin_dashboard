@@ -100,9 +100,9 @@ export default function BusinessStaffPage() {
                             <Card className="h-full transition hover:shadow-md">
                                 <div className="flex items-start justify-between gap-4">
                                     <div>
-                                        <h2 className="text-lg font-semibold">
-                                            {member.first_name}{" "}
-                                            {member.last_name}
+                                        <h2 className="text-lg text-[var(--text-primary)] font-semibold">
+                                            {member.user.first_name}{" "}
+                                            {member.user.last_name}
                                         </h2>
 
                                         {member.position && (
@@ -117,7 +117,7 @@ export default function BusinessStaffPage() {
                                     </Badge>
                                 </div>
 
-                                <div className="mt-4 space-y-1 text-sm">
+                                <div className="mt-4 space-y-1 text-sm text-[var(--text-primary)]">
                                     {member.phone && (
                                         <p>
                                             <span className="text-[var(--text-secondary)]">
