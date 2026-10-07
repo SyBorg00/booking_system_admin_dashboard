@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import PageHeader from "@/components/ui/PageHeader";
+import Button from "@/components/ui/Button";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
@@ -89,36 +91,19 @@ export default function BusinessDetailPage() {
         <main className="p-6">
 
             {/* Back to business link*/}
-            <div className="mb-6">
-                <Link
-                    href="/businesses"
-                    className="text-sm text-[var(--primary)] underline"
-                >
-                    ← Back to businesses
-                </Link>
-            </div>
-
-            {/* Business title and status section */}
-            <div className="flex items-start justify-between">
-                <div>
-                    <h1 className="text-3xl text-[var(--text-primary)] font-bold">
-                        {business.name}
-                    </h1>
-
-                    <p className="mt-1 text-gray-500">
-                        {business.slug}
-                    </p>
-                </div>
-
-                <span
-                    className={`rounded-full px-3 py-1 text-sm ${business.status === "active"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-gray-100 text-gray-700"
-                        }`}
-                >
-                    {business.status}
-                </span>
-            </div>
+            <PageHeader
+                title={business.name}
+                description={business.slug ?? undefined}
+                backHref="/businesses"
+                backLabel="Back to businesses"
+                action={
+                    <Link href={`/businesses/${business.id}/edit`}>
+                        <Button>
+                            Edit Business
+                        </Button>
+                    </Link>
+                }
+            />
 
             {/* Business details and contact info section*/}
             <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -151,6 +136,16 @@ export default function BusinessDetailPage() {
                                 Timezone:
                             </dt>
                             <dd>{business.timezone}</dd>
+                        </div>
+
+                        <div>
+                            <dt className="text-sm text-[var(--text-secondary)]">
+                                Status:
+                            </dt>
+                            <dd className={`rounded-full px-3 py-1 text-sm ${business.status === "active"
+                                ? "bg-green-100 text-green-700"
+                                : "bg-gray-100 text-gray-700"
+                                }`}>{business.status}</dd>
                         </div>
                     </dl>
                 </Card>
