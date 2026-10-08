@@ -272,6 +272,33 @@ export default function BusinessDetailPage() {
                 </Card>
             </div>
 
+            {/* Customer management section */}
+            <div className="mt-6">
+                <Card>
+                    <div className="flex items-center justify-between gap-4">
+                        <div>
+                            <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                                Customers
+                            </h2>
+
+                            <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                                Manage the customers associated with
+                                this business.
+                            </p>
+                        </div>
+
+                        <Link
+                            href={`/businesses/${business.id}/customers`}
+                        >
+                            <Button variant="secondary">
+                                View Customers
+                            </Button>
+                        </Link>
+                    </div>
+                </Card>
+            </div>
+
+
         </main>
     );
 }
