@@ -13,7 +13,7 @@ import {
 import PageHeader from "@/components/ui/PageHeader";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import Textarea from "@/components/ui/TextArea";
+import TextArea from "@/components/ui/TextArea";
 import Select from "@/components/ui/Select";
 
 export default function EditBusinessPage() {
@@ -152,7 +152,7 @@ export default function EditBusinessPage() {
                     </div>
 
                     {/* Business Description */}
-                    <Textarea
+                    <TextArea
                         id="description"
                         label="Description"
                         value={description}

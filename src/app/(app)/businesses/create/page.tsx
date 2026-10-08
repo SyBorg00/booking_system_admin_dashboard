@@ -9,7 +9,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import Textarea from "@/components/ui/TextArea";
+import TextArea from "@/components/ui/TextArea";
 import Select from "@/components/ui/Select";
 
 export default function CreateBusinessPage() {
@@ -115,7 +115,7 @@ export default function CreateBusinessPage() {
                     </div>
 
                     {/* Business Description */}
-                    <Textarea
+                    <TextArea
                         id="description"
                         label="Description"
                         value={description}

@@ -7,7 +7,7 @@ interface TextareaProps
     hint?: string;
 }
 
-export default function Textarea({
+export default function TextArea({
     label,
     error,
     hint,
