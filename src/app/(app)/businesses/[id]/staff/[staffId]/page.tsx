@@ -240,6 +240,32 @@ export default function StaffDetailPage() {
             </div>
 
 
+            {/* Display the staff time-offs */}
+            <div className="mt-6">
+                <Card>
+                    <div className="flex items-center justify-between gap-4">
+                        <div>
+                            <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                                Staff Time Off
+                            </h2>
+
+                            <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                                Manage vacations, leave, and other periods when this
+                                staff member is unavailable.
+                            </p>
+                        </div>
+
+                        <Link
+                            href={`/businesses/${businessId}/staff/${staff.id}/time-offs`}
+                        >
+                            <Button variant="secondary">
+                                Manage Time Off
+                            </Button>
+                        </Link>
+                    </div>
+                </Card>
+            </div>
+
             {/* Display the delete staff button */}
             <Card>
                 <div className="flex items-center justify-between gap-4">
