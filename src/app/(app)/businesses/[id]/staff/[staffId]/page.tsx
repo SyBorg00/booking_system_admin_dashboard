@@ -100,21 +100,28 @@ export default function StaffDetailPage() {
 
     return (
         <div className="space-y-6">
+
+            {/* HEADER */}
             <PageHeader
                 title={`${staff.user.first_name} ${staff.user.last_name}`}
                 description="View staff member information."
-                backHref={`/businesses/${businessId}/staff`}
-                backLabel="Back to staff"
-                action={
-                    <Link
-                        href={`/businesses/${businessId}/staff/${staff.id}/edit`}
-                    >
-                        <Button>
-                            Edit Staff
-                        </Button>
-                    </Link>
-                }
             />
+
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+                <Link
+                    href={`/businesses/${businessId}/staff`}
+                >
+                    <Button variant="secondary">
+                        Back to Staff List
+                    </Button>
+                </Link>
+
+                <Link href={`$/businesses/${businessId}/staff/${staff.id}/edit`}>
+                    <Button>
+                        Add Time Off
+                    </Button>
+                </Link>
+            </div>
 
             {/* Display information about the staff*/}
             <Card>
@@ -213,112 +220,122 @@ export default function StaffDetailPage() {
                 </div>
             </Card>
 
-            {/* Display the staff hours */}
-            <div className="mt-6">
-                <Card>
-                    <div className="flex items-center justify-between gap-4">
-                        <div>
-                            <h2 className="text-lg font-semibold text-[var(--text-primary)]">
-                                Staff Hours
-                            </h2>
 
-                            <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                                Manage working periods and days off
-                                for this staff member.
-                            </p>
-                        </div>
-
-                        <Link
-                            href={`/businesses/${businessId}/staff/${staff.id}/hours`}
-                        >
-                            <Button variant="secondary">
-                                Manage Hours
-                            </Button>
-                        </Link>
-                    </div>
-                </Card>
-            </div>
-
-
-            {/* Display the staff time-offs */}
-            <div className="mt-6">
-                <Card>
-                    <div className="flex items-center justify-between gap-4">
-                        <div>
-                            <h2 className="text-lg font-semibold text-[var(--text-primary)]">
-                                Staff Time Off
-                            </h2>
-
-                            <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                                Manage vacations, leave, and other periods when this
-                                staff member is unavailable.
-                            </p>
-                        </div>
-
-                        <Link
-                            href={`/businesses/${businessId}/staff/${staff.id}/time-offs`}
-                        >
-                            <Button variant="secondary">
-                                Manage Time Off
-                            </Button>
-                        </Link>
-                    </div>
-                </Card>
-            </div>
-
-            {/* Display the staff service button */}
             <Card>
-                <div className="flex items-center justify-between gap-4">
-                    <div>
-                        <h2 className="text-lg font-semibold text-[var(--text-primary)]">
-                            Assigned Services
-                        </h2>
-
-                        <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                            Choose which services this staff member can provide.
-                        </p>
-                    </div>
-
-                    <Link
-                        href={`/businesses/${businessId}/staff/${staff.id}/services`}
-                    >
-                        <Button variant="secondary">
-                            Manage Services
-                        </Button>
-                    </Link>
-                </div>
-            </Card>
-
-            {/* Display the delete staff button */}
-            <Card>
-                <div className="flex items-center justify-between gap-4">
+                <div className="space-y-6">
                     <div>
                         <h2 className="text-lg font-semibold text-[var(--text-primary)]">
                             Staff Management
                         </h2>
 
                         <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                            Remove this staff member from the business.
+                            Manage this Staff Member
                         </p>
                     </div>
-
-                    <DeleteButton
-                        onDelete={() =>
-                            deleteStaff(
-                                businessId,
-                                staff.id
-                            )
-                        }
-                        redirectTo={`/businesses/${businessId}/staff`}
-                        confirmationMessage={`Are you sure you want to remove ${staff.user.first_name} ${staff.user.last_name} from this business?`}
-                        label="Delete Staff"
-                        deletingLabel="Deleting..."
-                    />
-
                 </div>
+                <div className="grid gap-6 sm:grid-cols-2 mt-5">
+                    {/* Display the staff hours */}
+                    <Card>
+                        <div className="flex items-center justify-between gap-4">
+                            <div>
+                                <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                                    Staff Hours
+                                </h2>
+
+                                <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                                    Manage working periods and days off
+                                    for this staff member.
+                                </p>
+                            </div>
+
+                            <Link
+                                href={`/businesses/${businessId}/staff/${staff.id}/hours`}
+                            >
+                                <Button variant="secondary">
+                                    Manage Hours
+                                </Button>
+                            </Link>
+                        </div>
+                    </Card>
+
+                    {/* Display the staff time-offs */}
+                    <Card>
+                        <div className="flex items-center justify-between gap-4">
+                            <div>
+                                <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                                    Staff Time Off
+                                </h2>
+
+                                <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                                    Manage vacations, leave, and other periods when this
+                                    staff member is unavailable.
+                                </p>
+                            </div>
+
+                            <Link
+                                href={`/businesses/${businessId}/staff/${staff.id}/time-offs`}
+                            >
+                                <Button variant="secondary">
+                                    Manage Time Off
+                                </Button>
+                            </Link>
+                        </div>
+                    </Card>
+
+                    {/* Display the staff service button */}
+                    <Card>
+                        <div className="flex items-center justify-between gap-4">
+                            <div>
+                                <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                                    Assigned Services
+                                </h2>
+
+                                <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                                    Choose which services this staff member can provide.
+                                </p>
+                            </div>
+
+                            <Link
+                                href={`/businesses/${businessId}/staff/${staff.id}/services`}
+                            >
+                                <Button variant="secondary">
+                                    Manage Services
+                                </Button>
+                            </Link>
+                        </div>
+                    </Card>
+
+                    {/* Display the delete staff button */}
+                    <Card className="bg-red-100">
+                        <div className="flex items-center justify-between gap-4">
+                            <div>
+                                <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                                    Delete This Staff
+                                </h2>
+
+                                <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                                    Remove this staff member from the business.
+                                </p>
+                            </div>
+
+                            <DeleteButton
+                                onDelete={() =>
+                                    deleteStaff(
+                                        businessId,
+                                        staff.id
+                                    )
+                                }
+                                redirectTo={`/businesses/${businessId}/staff`}
+                                confirmationMessage={`Are you sure you want to remove ${staff.user.first_name} ${staff.user.last_name} from this business?`}
+                                label="Delete Staff"
+                                deletingLabel="Deleting..."
+                            />
+
+                        </div>
+                    </Card>
+                </div>
+
             </Card>
-
-
         </div>
     );
 }
