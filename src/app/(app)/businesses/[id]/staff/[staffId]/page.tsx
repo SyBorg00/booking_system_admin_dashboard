@@ -266,6 +266,29 @@ export default function StaffDetailPage() {
                 </Card>
             </div>
 
+            {/* Display the staff service button */}
+            <Card>
+                <div className="flex items-center justify-between gap-4">
+                    <div>
+                        <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                            Assigned Services
+                        </h2>
+
+                        <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                            Choose which services this staff member can provide.
+                        </p>
+                    </div>
+
+                    <Link
+                        href={`/businesses/${businessId}/staff/${staff.id}/services`}
+                    >
+                        <Button variant="secondary">
+                            Manage Services
+                        </Button>
+                    </Link>
+                </div>
+            </Card>
+
             {/* Display the delete staff button */}
             <Card>
                 <div className="flex items-center justify-between gap-4">
@@ -294,6 +317,8 @@ export default function StaffDetailPage() {
 
                 </div>
             </Card>
+
+
         </div>
     );
 }
