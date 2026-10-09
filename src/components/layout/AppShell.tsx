@@ -39,21 +39,21 @@ export default function AppShell({
     const pathname = usePathname();
     const router = useRouter();
 
+    // Get authentication state from the useAuth hook
     const { user, authenticated, loading, logout } = useAuth();
 
+    // Redirect to login if not authenticated
     useEffect(() => {
-        if (!loading && !authenticated || !user) {
+        if (loading) {
+            return;
+        }
 
+        if (!authenticated || !user) {
             router.replace("/login");
         }
-    }, [
-        loading,
-        authenticated,
-        user,
-        pathname,
-        router,
-    ]);
+    }, [loading, authenticated, user, pathname, router]);
 
+    // Render nothing while loading or if not authenticated
     if (loading) {
         return null;
     }
@@ -62,6 +62,7 @@ export default function AppShell({
         return null;
     }
 
+    // Handle logout and redirect to login page
     function handleLogout() {
         logout();
         router.replace("/login");
@@ -110,7 +111,7 @@ export default function AppShell({
 
                         <button
                             onClick={handleLogout}
-                            className="mt-3 w-full rounded border px-3 py-2 text-sm hover:bg-gray-100"
+                            className="mt-3 w-full rounded border px-3 py-2 text-sm text-[var(--text-primary)] hover:bg-gray-100"
                         >
                             Logout
                         </button>
