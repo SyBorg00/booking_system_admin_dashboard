@@ -298,6 +298,31 @@ export default function BusinessDetailPage() {
                 </Card>
             </div>
 
+            {/* Availability section */}
+            <div className="mt-6">
+                <Card>
+                    <div className="flex items-center justify-between gap-4">
+                        <div>
+                            <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                                Availability
+                            </h2>
+
+                            <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                                Review the availability of staff and services for this business.
+                            </p>
+                        </div>
+
+                        <Link
+                            href={`/businesses/${business.id}/availability`}
+                        >
+                            <Button variant="secondary">
+                                View Availability
+                            </Button>
+                        </Link>
+                    </div>
+                </Card>
+            </div>
+
 
         </main>
     );
