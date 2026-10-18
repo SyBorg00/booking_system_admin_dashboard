@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { SubmitEvent } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Input from "@/components/ui/Input";
+import { BUSINESS_TIMEZONES } from "@/lib/constants/business-timezones";
 
 import {
     getBusiness,
@@ -173,14 +174,14 @@ export default function EditBusinessPage() {
                             placeholder="PHP"
                         />
 
-                        <Input
-                            id="timezone"
-                            type="text"
-                            label="Timezone"
+                        <Select
+                            label="Business timezone"
                             value={timezone}
                             onChange={(event) => setTimezone(event.target.value)}
-                            required
-                            placeholder="Asia/Manila"
+                            options={[
+                                { value: "", label: "Select a timezone" },
+                                ...BUSINESS_TIMEZONES,
+                            ]}
                         />
                     </div>
 

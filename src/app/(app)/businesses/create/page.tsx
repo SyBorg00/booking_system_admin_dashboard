@@ -11,6 +11,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import TextArea from "@/components/ui/TextArea";
 import Select from "@/components/ui/Select";
+import { BUSINESS_TIMEZONES } from "@/lib/constants/business-timezones";
 
 export default function CreateBusinessPage() {
     const router = useRouter();
@@ -83,9 +84,8 @@ export default function CreateBusinessPage() {
                         </div>
                     )}
 
+                    {/* Business Name and slug */}
                     <div className="grid gap-6 md:grid-cols-2 text-[var(--text-label)]">
-
-                        {/* Business Name and slug */}
                         <div className="grid gap-6 md:grid-cols-2">
                             <Input
                                 id="name"
@@ -137,14 +137,14 @@ export default function CreateBusinessPage() {
                             placeholder="PHP"
                         />
 
-                        <Input
-                            id="timezone"
-                            type="text"
-                            label="Timezone"
+                        <Select
+                            label="Business timezone"
                             value={timezone}
                             onChange={(event) => setTimezone(event.target.value)}
-                            required
-                            placeholder="Asia/Manila"
+                            options={[
+                                { value: "", label: "Select a timezone" },
+                                ...BUSINESS_TIMEZONES,
+                            ]}
                         />
                     </div>
 
