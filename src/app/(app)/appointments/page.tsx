@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState, type SubmitEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 import { getAppointments, type Appointment, type AppointmentStatus } from "@/lib/api/appointments";
 
@@ -39,7 +40,7 @@ function formatDateTime(value: string): string {
     });
 }
 
-// Helper function to get the customer's name from the appointment object
+// Helper function to display the customer's full name from the appointment object
 function getCustomerName(appointment: Appointment): string {
     const customer = appointment.customer;
 
@@ -54,7 +55,7 @@ function getCustomerName(appointment: Appointment): string {
     return name || customer.name || `Customer #${customer.id}`;
 }
 
-// Helper function to get the staff's name from the appointment object
+// Helper function to display the staff's name from the appointment object
 function getStaffName(appointment: Appointment): string {
     const staff = appointment.staff;
 
@@ -73,6 +74,7 @@ function getStaffName(appointment: Appointment): string {
 
     return name || `Staff #${staff.id}`;
 }
+
 
 // Helper function to determine the badge variant based on the appointment status
 function getStatusVariant(
@@ -281,7 +283,7 @@ export default function AppointmentsPage() {
                 {/* Headers for this section */}
                 <div className="mb-4 flex items-center justify-between gap-3">
                     <h2 className="text-lg font-semibold text-[var(--text-primary)]">
-                        Appointment records
+                        Appointment Records
                     </h2>
 
                     <span className="text-sm text-[var(--text-secondary)]">
