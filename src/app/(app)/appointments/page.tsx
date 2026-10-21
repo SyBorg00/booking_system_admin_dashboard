@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState, type SubmitEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { formatBusinessDateTime } from "@/lib/utils/date-time";
 
 import { getAppointments, type Appointment, type AppointmentStatus } from "@/lib/api/appointments";
 
@@ -22,23 +22,6 @@ const statusOptions = [
     { value: "cancelled", label: "Cancelled" },
     { value: "no_show", label: "No-show" },
 ];
-
-// Helper function to format date and time for better readability
-function formatDateTime(value: string): string {
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) {
-        return value;
-    }
-
-    return date.toLocaleString(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-    });
-}
 
 // Helper function to display the customer's full name from the appointment object
 function getCustomerName(appointment: Appointment): string {
@@ -357,14 +340,24 @@ export default function AppointmentsPage() {
                                         </td>
 
                                         <td className="px-4 py-4 text-[var(--text-secondary)]">
-                                            {formatDateTime(
-                                                appointment.start_datetime
+                                            {appointment.business ? (
+                                                formatBusinessDateTime(
+                                                    appointment.start_datetime,
+                                                    appointment.business.timezone,
+                                                )
+                                            ) : (
+                                                "Business timezone unavailable"
                                             )}
                                         </td>
 
                                         <td className="px-4 py-4 text-[var(--text-secondary)]">
-                                            {formatDateTime(
-                                                appointment.end_datetime
+                                            {appointment.business ? (
+                                                formatBusinessDateTime(
+                                                    appointment.end_datetime,
+                                                    appointment.business.timezone,
+                                                )
+                                            ) : (
+                                                "Business timezone unavailable"
                                             )}
                                         </td>
 
