@@ -44,6 +44,7 @@ export interface Appointment {
         last_name?: string;
         name?: string;
         email?: string | null;
+        phone?: string | null;
     } | null;
     staff?: {
         id: number;
@@ -57,6 +58,7 @@ export interface Appointment {
     business?: {
         id: number;
         name: string;
+        timezone: string;
     } | null;
 
     // Optional array of appointment services (will call the AppointmentService interface)
