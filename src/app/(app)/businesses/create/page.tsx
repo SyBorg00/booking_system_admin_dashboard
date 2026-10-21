@@ -104,7 +104,6 @@ export default function CreateBusinessPage() {
                                     label="Slug"
                                     value={slug}
                                     onChange={(event) => setSlug(event.target.value)}
-                                    required
                                     placeholder="demo-booking-business"
                                 />
                                 <p className="mt-1 text-xs text-[var(--text-secondary)]">
