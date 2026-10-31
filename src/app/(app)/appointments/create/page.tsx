@@ -5,6 +5,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { apiFetch } from "@/lib/api/client";
 import { createAppointment } from "@/lib/api/appointments";
+import type { AvailableSlot, AvailabilityResponse } from "@/lib/api/availability";
+import type { Service } from "@/lib/api/services";
+import type { Business } from "@/lib/api/businesses";
+import type { Customer } from "@/lib/api/customers";
+import type { Staff } from "@/lib/api/staff";
 
 import PageHeader from "@/components/ui/PageHeader";
 import Card from "@/components/ui/Card";
@@ -12,47 +17,6 @@ import Button from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
 import TextArea from "@/components/ui/TextArea";
 import Input from "@/components/ui/Input";
-
-/*
-Interfaces for the data structures used in the appointment creation form 
-(something that is not directly implemented in the appointment API helper:
-- useful for the frontend form)
-*/
-interface Business {
-    id: number;
-    name: string;
-    timezone: string;
-}
-
-interface Customer {
-    id: number;
-    first_name: string;
-    last_name: string;
-    email?: string | null;
-    status?: string;
-}
-
-interface StaffMember {
-    id: number;
-    first_name?: string;
-    last_name?: string;
-    user?: {
-        first_name?: string;
-        last_name?: string;
-    } | null;
-    status?: string;
-}
-
-interface Service {
-    id: number;
-    name: string;
-    description?: string | null;
-    price: string | number;
-    currency?: string;
-    duration_minutes: number;
-    buffer_minutes: number;
-    status?: string;
-}
 
 // Generic interface for API responses that return a list of items (different from the appointment API helper, as it will store customers, staff, and services)
 interface ApiListResponse<T> {
@@ -64,23 +28,12 @@ interface ApiItemResponse<T> {
     data: T;
 }
 
-// Interface for the available time slots returned by the availability API
-interface AvailableSlot {
-    start: string;
-    end: string;
-}
-
-// Interface for the response from the availability API
-interface AvailabilityResponse {
-    available_slots: AvailableSlot[];
-}
-
 // Helper function to get the full name of a staff member, falling back to "Staff #ID" if no name is available
-function getStaffName(staff: StaffMember): string {
+function getStaffName(staff: Staff): string {
     const firstName =
-        staff.user?.first_name ?? staff.first_name ?? "";
+        staff.user?.first_name ?? staff.user.first_name ?? "";
     const lastName =
-        staff.user?.last_name ?? staff.last_name ?? "";
+        staff.user?.last_name ?? staff.user.last_name ?? "";
 
     return (
         [firstName, lastName].filter(Boolean).join(" ") ||
@@ -119,7 +72,7 @@ export default function CreateAppointmentPage() {
     const [businessId, setBusinessId] = useState(initialBusinessId);
     const [businessTimezone, setBusinessTimezone] = useState("");
     const [customers, setCustomers] = useState<Customer[]>([]);
-    const [staffMembers, setStaffMembers] = useState<StaffMember[]>([]);
+    const [staffMembers, setStaffMembers] = useState<Staff[]>([]);
     const [services, setServices] = useState<Service[]>([]);
 
     const [customerId, setCustomerId] = useState("");
@@ -159,7 +112,7 @@ export default function CreateAppointmentPage() {
                         apiFetch<ApiListResponse<Customer>>(
                             `/businesses/${businessId}/customers`
                         ),
-                        apiFetch<ApiListResponse<StaffMember>>(
+                        apiFetch<ApiListResponse<Staff>>(
                             `/businesses/${businessId}/staff`
                         ),
                         apiFetch<ApiListResponse<Service>>(
