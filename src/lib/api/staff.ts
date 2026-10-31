@@ -9,6 +9,7 @@ export interface Staff {
     position: string | null;
     created_at: string;
     updated_at: string;
+    status: string;
     user: StaffUser;
 }
 
