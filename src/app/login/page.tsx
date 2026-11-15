@@ -3,8 +3,7 @@
 import { useState } from "react";
 import type { SubmitEvent } from "react";
 import { useRouter } from "next/navigation";
-import { saveAuth } from "@/lib/auth";
-
+import { useAuth } from "@/context/AuthContext";
 import { login } from "@/lib/api/auth";
 
 export default function LoginPage() {
@@ -15,6 +14,7 @@ export default function LoginPage() {
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const { login: setAuth } = useAuth();
 
     async function handleSubmit(
         event: SubmitEvent<HTMLFormElement>
@@ -28,14 +28,16 @@ export default function LoginPage() {
                 email,
                 password,
             });
-            saveAuth(
-                response.token,
-                response.user
-            );
-            router.push("/dashboard");
+
+            // Update authentication context.
+            setAuth(response.token, response.user);
+
+            // Navigate to dashboard.
+            router.replace("/dashboard");
 
         } catch (error) {
             console.error("LOGIN ERROR:", error);
+
             setError(
                 error instanceof Error
                     ? error.message

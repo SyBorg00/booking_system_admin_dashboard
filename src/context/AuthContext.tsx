@@ -2,13 +2,14 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { User } from "@/lib/api/auth";
-import { clearAuth, getUser, isAuthenticated, } from "@/lib/auth";
+import { saveAuth, clearAuth, getUser, isAuthenticated, } from "@/lib/auth";
 
 // Create a context for authentication
 interface AuthContextType {
     user: User | null;
     authenticated: boolean;
     loading: boolean;
+    login: (token: string, user: User) => void;
     logout: () => void;
 }
 
@@ -41,6 +42,14 @@ export function AuthProvider({
         setLoading(false);
     }, []);
 
+    // Login function: save credentials and update React state.
+    function login(token: string, user: User) {
+        saveAuth(token, user);
+
+        setUser(user);
+        setAuthenticated(true);
+    }
+
     // Logout function that clears the authentication state and localStorage
     function logout() {
         clearAuth();
@@ -56,6 +65,7 @@ export function AuthProvider({
                 user,
                 authenticated,
                 loading,
+                login,
                 logout,
             }}
         >
