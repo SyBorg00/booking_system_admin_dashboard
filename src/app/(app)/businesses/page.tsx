@@ -11,13 +11,19 @@ import {
     type Business,
 } from "@/lib/api/businesses";
 
+import { useAuth } from "@/context/AuthContext";
+
 export default function BusinessesPage() {
 
-    // State to hold the businesses data, loading state, and error message
+    // State to hold the businesses data
+    // , loading state, and error message
     const [businesses, setBusinesses] =
         useState<Business[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const { user } = useAuth();
+
+    const canCreateBusiness = user?.role === "super_admin";
 
     // Fetch the businesses data when the component mounts
     useEffect(() => {
@@ -62,11 +68,13 @@ export default function BusinessesPage() {
                 title="Businesses"
                 description="Manage the businesses in your booking system."
                 action={
-                    <Link href="/businesses/create">
-                        <Button>
-                            Create Business
-                        </Button>
-                    </Link>
+                    canCreateBusiness && (
+                        <Link href="/businesses/create">
+                            <Button>
+                                Create Business
+                            </Button>
+                        </Link>
+                    )
                 }
             />
 

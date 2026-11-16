@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { SubmitEvent } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 import { createBusiness } from "@/lib/api/businesses";
 import PageHeader from "@/components/ui/PageHeader";
@@ -30,6 +31,21 @@ export default function CreateBusinessPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
+    const { user, authenticated, loading: authLoading } = useAuth();
+
+    // Redirect to businesses page if not authenticated or not a super admin (treat it as an additional security measure in case someone tries to access this page directly via URL)
+    useEffect(() => {
+        if (authLoading) return;
+
+        if (!authenticated || user?.role !== "super_admin") {
+            router.replace("/businesses");
+        }
+    }, [authLoading, authenticated, user, router]);
+
+    // Render nothing while loading or if not authenticated or not a super admin
+    if (authLoading || !authenticated || user?.role !== "super_admin") {
+        return null;
+    }
     // Handle form submission
     async function handleSubmit(
         event: SubmitEvent<HTMLFormElement>
@@ -162,7 +178,7 @@ export default function CreateBusinessPage() {
                         <Input
                             id="email"
                             type="email"
-                            label="Phone"
+                            label="Email"
                             value={email}
                             onChange={(event) => setEmail(event.target.value)}
                             placeholder="hello@example.com"
